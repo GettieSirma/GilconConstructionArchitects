@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gilcon Construction Architects - Architecture, construction and design solutions in Kenya and the USA.">
-    <title>Gilcon Construction Architects | Architecture & Construction</title>
+    <title>Gilcon Construction Architects | Architecture & Construction in Kenya and the USA</title>
+    <meta name="description" content="Gilcon Construction Architects - integrated architectural design, construction, 3D visualization, interiors and project management in Kenya and the USA.">
+    <meta name="theme-color" content="#202421">
+    <link rel="canonical" href="https://www.gilconconstructionarchitects.com/">
+
+    <!-- SECURITY: Content Security Policy + referrer policy.
+         Meta CSP cannot set frame-ancestors; also send these as real HTTP headers on your host:
+         Content-Security-Policy (with frame-ancestors 'none'), X-Content-Type-Options: nosniff,
+         Strict-Transport-Security, Permissions-Policy. Move the inline script to a file + nonce/hash to drop 'unsafe-inline'. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gilcon Construction Architects">
+    <meta property="og:description" content="Building spaces. Creating possibilities. Architecture and construction in Kenya and the USA.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Structured data (no email included, to limit scraping) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GeneralContractor",
+      "name": "Gilcon Construction Architects",
+      "description": "Architectural design, construction, 3D visualization, interior design, project consultancy and project management.",
+      "url": "https://www.gilconconstructionarchitects.com/",
+      "areaServed": [{"@type": "Country", "name": "Kenya"}, {"@type": "Country", "name": "United States"}],
+      "knowsAbout": ["Architectural design", "Construction", "3D visualization", "Interior design", "Project management"]
+    }
+    </script>
+
+    <script>document.documentElement.classList.add('js');</script>
+    <noscript><style>.reveal{opacity:1!important;transform:none!important}.consent-banner{display:none!important}</style></noscript>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,332 +47,477 @@
             --dark: #202421;
             --cream: #f5f2eb;
             --white: #ffffff;
-            --muted: #777d76;
+            --muted: #5c625b;          /* 5.9:1 on cream (WCAG AA) */
             --accent: #b49a72;
+            --accent-text: #7a6339;    /* AA-compliant accent for text on light backgrounds */
+            --bg: var(--cream);
+            --surface: #ffffff;
+            --text: var(--dark);
+            --line: #d9d4c7;
+            --ok: #2f6b3a;
+            --err: #a12626;
+            --nav-h: 82px;
+        }
+        [data-theme="dark"] {
+            --bg: #171b18; --surface: #202421; --text: #f1efe8; --muted: #b3b8b1;
+            --accent-text: #cdb48a; --line: #3a403b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; color: var(--dark); background: var(--cream); }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 10px); }
+        body { font-family: 'DM Sans', system-ui, sans-serif; color: var(--text); background: var(--bg); transition: background .3s, color .3s; }
         a { text-decoration: none; color: inherit; }
-        button { font: inherit; }
+        button { font: inherit; color: inherit; }
+        img { max-width: 100%; display: block; }
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+        .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .skip-link { position: absolute; left: 12px; top: -60px; background: var(--dark); color: #fff; padding: 12px 18px; z-index: 5000; transition: top .2s; }
+        .skip-link:focus { top: 12px; }
 
+        .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 3000; }
+
+        /* NAV */
         .navbar {
-            height: 82px; padding: 0 7%;
+            height: var(--nav-h); padding: 0 7%;
             display: flex; justify-content: space-between; align-items: center;
-            background: var(--cream); position: sticky; top: 0; z-index: 1000;
+            background: var(--bg); position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid transparent; transition: transform .35s, border-color .3s, background .3s;
         }
+        .navbar.scrolled { border-bottom-color: var(--line); }
+        .navbar.hidden { transform: translateY(-100%); }
         .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent); }
-
-        .nav-links { display: flex; align-items: center; gap: 35px; list-style: none; }
-        .nav-links a { font-size: 13px; font-weight: 500; transition: color .3s; }
-        .nav-links a:hover { color: var(--accent); }
-        .nav-cta { background: var(--dark); color: white !important; padding: 14px 22px; }
-
+        .logo span { color: var(--accent-text); }
+        .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+        .nav-links a { font-size: 13px; font-weight: 500; transition: color .3s; padding: 6px 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: var(--accent-text); }
+        .nav-links a.active { border-bottom-color: var(--accent); }
+        .nav-links a.nav-cta { background: var(--dark); color: #fff; padding: 14px 22px; border: 0; }
+        [data-theme="dark"] .nav-links a.nav-cta { background: var(--accent); color: var(--dark); }
+        .icon-btn { border: 1px solid var(--line); background: transparent; width: 40px; height: 40px; cursor: pointer; font-size: 17px; }
+        .icon-btn:hover { border-color: var(--accent); }
         .menu-toggle { display: none; border: 0; background: none; font-size: 28px; cursor: pointer; }
 
-        .hero {
-            min-height: 660px; height: 83vh; position: relative;
-            display: flex; align-items: center; padding: 0 10%; color: white;
-            background:
-                linear-gradient(90deg, rgba(15,20,17,.85), rgba(15,20,17,.15)),
-                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=85')
-                center/cover;
-        }
-        .hero-content { max-width: 720px; }
-        .eyebrow {
-            text-transform: uppercase; letter-spacing: 3px; font-size: 11px;
-            color: var(--accent); margin-bottom: 25px; font-weight: 700;
-        }
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(45px, 6vw, 78px); line-height: 1.12; font-weight: 400; margin-bottom: 25px;
-        }
-        .hero p { max-width: 500px; color: #e3e3df; line-height: 1.8; font-size: 15px; margin-bottom: 35px; }
-
+        /* BUTTONS */
         .btn {
-            display: inline-block; padding: 16px 27px; background: var(--accent); color: white;
+            display: inline-block; padding: 16px 27px; background: var(--accent); color: var(--dark);
             font-size: 12px; font-weight: 700; letter-spacing: 1px; border: none; cursor: pointer; transition: .3s;
         }
-        .btn:hover { background: #947b56; transform: translateY(-3px); }
-        .btn-outline { background: transparent; border: 1px solid white; margin-left: 12px; }
-        .btn-outline:hover { background: white; color: var(--dark); }
+        .btn:hover { background: #c7b088; transform: translateY(-3px); }
+        .btn-outline { background: transparent; border: 1px solid currentColor; color: inherit; }
+        .btn-outline:hover { background: #fff; color: var(--dark); }
+        .btn-dark { background: var(--dark); color: #fff; }
+        .btn-dark:hover { background: #333a34; }
+        .btn:disabled { opacity: .6; cursor: wait; transform: none; }
 
-        .intro {
-            padding: 110px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+        /* HERO */
+        .hero {
+            min-height: 680px; height: 86vh; position: relative;
+            display: flex; flex-direction: column; justify-content: center; padding: 0 10%; color: #fff;
+            background:
+                linear-gradient(90deg, rgba(15,20,17,.88), rgba(15,20,17,.2)),
+                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=80') center/cover;
         }
-        .section-label {
-            color: var(--accent); text-transform: uppercase; letter-spacing: 3px;
-            font-size: 11px; font-weight: 700; margin-bottom: 20px;
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(35px, 4vw, 49px); line-height: 1.2; font-weight: 400; margin-bottom: 25px;
-        }
-        .intro p { color: var(--muted); font-size: 14px; line-height: 1.9; margin-bottom: 25px; }
+        .hero-content { max-width: 720px; }
+        .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 11px; color: var(--accent); margin-bottom: 25px; font-weight: 700; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(42px, 6vw, 78px); line-height: 1.12; font-weight: 400; margin-bottom: 25px; }
+        .hero p { max-width: 520px; color: #e9e9e5; line-height: 1.8; font-size: 15px; margin-bottom: 35px; }
+        .hero .btn-outline { margin-left: 12px; }
+        .hero-stats { display: flex; gap: 45px; flex-wrap: wrap; margin-top: 60px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.25); max-width: 720px; }
+        .stat b { display: block; font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 400; color: var(--accent); }
+        .stat span { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #d8d8d3; }
+
+        /* SECTIONS */
+        .section-label { color: var(--accent-text); text-transform: uppercase; letter-spacing: 3px; font-size: 11px; font-weight: 700; margin-bottom: 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(33px, 4vw, 49px); line-height: 1.2; font-weight: 400; margin-bottom: 25px; }
+        .lead { color: var(--muted); font-size: 15px; line-height: 1.9; }
+
+        .intro { padding: 110px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .intro p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-bottom: 25px; }
         .intro-image { width: 100%; height: 450px; object-fit: cover; }
+        .principles { list-style: none; display: grid; gap: 14px; margin-bottom: 32px; }
+        .principles li { padding-left: 26px; position: relative; font-size: 14px; line-height: 1.7; }
+        .principles li::before { content: ""; position: absolute; left: 0; top: 10px; width: 14px; height: 1px; background: var(--accent); }
+        .principles strong { font-weight: 600; }
 
-        .services { background: var(--dark); color: white; padding: 105px 10%; }
-        .services .section-title { max-width: 600px; }
+        .services { background: var(--dark); color: #fff; padding: 105px 10%; }
+        .services .section-label { color: var(--accent); }
+        .services .section-title { max-width: 620px; }
         .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 55px; }
         .service-card { padding: 35px 28px; border: 1px solid #454b45; transition: .3s; }
         .service-card:hover { background: #303831; transform: translateY(-5px); }
         .service-number { color: var(--accent); font-size: 13px; margin-bottom: 35px; }
         .service-card h3 { font-family: 'Playfair Display', serif; font-size: 25px; font-weight: 400; margin-bottom: 18px; }
-        .service-card p { font-size: 13px; line-height: 1.8; color: #b7bcb7; }
+        .service-card p { font-size: 14px; line-height: 1.8; color: #c3c8c3; }
 
-        .projects { padding: 105px 10%; }
-        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; }
-        .project-card { overflow: hidden; }
+        /* PROCESS (tabs) */
+        .process { padding: 105px 10%; }
+        .tabs { margin-top: 50px; display: grid; grid-template-columns: 300px 1fr; gap: 50px; }
+        .tablist { display: flex; flex-direction: column; border-left: 1px solid var(--line); }
+        .tab { text-align: left; background: none; border: 0; border-left: 3px solid transparent; margin-left: -1px; padding: 15px 20px; cursor: pointer; font-size: 14px; color: var(--muted); transition: .25s; }
+        .tab span { display: inline-block; width: 34px; color: var(--accent-text); font-weight: 700; }
+        .tab:hover { color: var(--text); }
+        .tab[aria-selected="true"] { border-left-color: var(--accent); color: var(--text); font-weight: 600; background: var(--surface); }
+        .tabpanel { background: var(--surface); padding: 40px; min-height: 280px; border: 1px solid var(--line); }
+        .tabpanel h3 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 30px; margin-bottom: 16px; }
+        .tabpanel p { color: var(--muted); line-height: 1.9; font-size: 15px; margin-bottom: 22px; }
+        .tabpanel h4 { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-text); margin-bottom: 10px; }
+        .tabpanel ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tabpanel li { border: 1px solid var(--line); padding: 7px 13px; font-size: 13px; }
+
+        /* PROJECTS */
+        .projects { padding: 105px 10%; background: var(--surface); }
+        .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+        .chip { border: 1px solid var(--line); background: transparent; padding: 10px 20px; font-size: 12px; font-weight: 600; letter-spacing: .5px; cursor: pointer; transition: .25s; }
+        .chip:hover { border-color: var(--accent); }
+        .chip[aria-pressed="true"] { background: var(--dark); color: #fff; border-color: var(--dark); }
+        [data-theme="dark"] .chip[aria-pressed="true"] { background: var(--accent); color: var(--dark); border-color: var(--accent); }
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
+        .project-card { background: none; border: 0; text-align: left; cursor: pointer; display: block; width: 100%; animation: fadeUp .5s both; }
+        .project-card .thumb { overflow: hidden; }
         .project-card img { width: 100%; height: 330px; object-fit: cover; transition: transform .5s; }
         .project-card:hover img { transform: scale(1.04); }
         .project-info { padding: 20px 0; }
         .project-info h3 { font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 400; margin-bottom: 8px; }
-        .project-info p { color: var(--muted); font-size: 12px; }
+        .project-info p { color: var(--muted); font-size: 13px; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+        /* PLANNER */
+        .planner { padding: 105px 10%; display: grid; grid-template-columns: 1fr 1.1fr; gap: 70px; align-items: start; }
+        .planner-card { background: var(--surface); border: 1px solid var(--line); padding: 40px; }
+        .planner-progress { display: flex; gap: 6px; margin-bottom: 26px; }
+        .planner-progress i { flex: 1; height: 3px; background: var(--line); transition: background .3s; }
+        .planner-progress i.done { background: var(--accent); }
+        .planner-card h3 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 26px; margin-bottom: 20px; }
+        .options { display: grid; gap: 10px; margin-bottom: 24px; }
+        .option { text-align: left; background: transparent; border: 1px solid var(--line); padding: 14px 18px; cursor: pointer; font-size: 14px; transition: .2s; }
+        .option:hover { border-color: var(--accent); }
+        .option[aria-checked="true"] { border-color: var(--accent); background: rgba(180,154,114,.16); font-weight: 600; }
+        .planner-nav { display: flex; justify-content: space-between; gap: 12px; }
+        .planner-summary { white-space: pre-line; background: var(--bg); border: 1px dashed var(--accent); padding: 18px; font-size: 14px; line-height: 1.8; margin-bottom: 22px; }
+
+        /* STANDARDS */
+        .standards { background: var(--dark); color: #fff; padding: 105px 10%; }
+        .standards .section-label { color: var(--accent); }
+        .standard-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 50px; }
+        .standard { border-top: 2px solid var(--accent); padding-top: 22px; }
+        .standard h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 12px; }
+        .standard p { font-size: 14px; line-height: 1.8; color: #c3c8c3; }
+
+        /* FAQ */
+        .faq { padding: 105px 10%; max-width: 1100px; margin: 0 auto; }
+        details { border-bottom: 1px solid var(--line); }
+        summary { cursor: pointer; padding: 22px 0; font-weight: 600; font-size: 16px; list-style: none; display: flex; justify-content: space-between; gap: 20px; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: "+"; color: var(--accent-text); font-size: 22px; line-height: 1; }
+        details[open] summary::after { content: "\2212"; }
+        details p { color: var(--muted); line-height: 1.9; font-size: 15px; padding: 0 40px 24px 0; }
 
         /* CONTACT */
         .contact {
-            background:
-                linear-gradient(rgba(20,25,21,.82), rgba(20,25,21,.82)),
-                url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=85')
-                center/cover;
-            padding: 110px 10%; text-align: center; color: white;
+            background: linear-gradient(rgba(20,25,21,.86), rgba(20,25,21,.86)),
+                url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=80') center/cover;
+            padding: 110px 10%; text-align: center; color: #fff;
         }
+        .contact .section-label { color: var(--accent); }
         .contact .section-title { max-width: 650px; margin: 0 auto 25px; }
-        .contact > div > p { color: #ddd; margin-bottom: 35px; line-height: 1.8; }
-
-        .contact-form {
-            max-width: 560px; margin: 0 auto; text-align: left;
-            display: grid; gap: 14px;
-        }
-        .contact-form input,
-        .contact-form textarea {
+        .contact .lead { color: #e2e2de; margin-bottom: 35px; }
+        .contact-form { max-width: 580px; margin: 0 auto; text-align: left; display: grid; gap: 16px; }
+        .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .5px; margin-bottom: 7px; }
+        .field label small { font-weight: 400; color: #cfd3ce; }
+        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form input[type="tel"], .contact-form textarea {
             width: 100%; padding: 15px 16px; font: inherit; font-size: 14px;
-            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.35);
-            color: white; outline: none; transition: border-color .3s;
+            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.4); color: #fff; outline: none; transition: border-color .3s;
         }
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder { color: #cfd3ce; }
-        .contact-form input:focus,
-        .contact-form textarea:focus { border-color: var(--accent); }
-        .contact-form textarea { min-height: 130px; resize: vertical; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(180,154,114,.35); }
+        .contact-form [aria-invalid="true"] { border-color: #ff9d9d; }
+        .contact-form textarea { min-height: 140px; resize: vertical; }
+        .field-error { color: #ffb4b4; font-size: 12px; min-height: 16px; margin-top: 5px; }
+        .counter { text-align: right; font-size: 11px; color: #cfd3ce; margin-top: 4px; }
+        .consent-check { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; line-height: 1.6; color: #e2e2de; }
+        .consent-check input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+        .linklike { background: none; border: 0; padding: 0; cursor: pointer; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+        .hp { position: absolute; left: -9999px; height: 0; overflow: hidden; }
         .contact-form .btn { width: 100%; }
-        .contact-form .btn:disabled { opacity: .6; cursor: wait; transform: none; }
-        .hp { position: absolute; left: -9999px; }
         .form-status { min-height: 22px; font-size: 14px; text-align: center; }
-        .form-status.ok { color: #b9e4b9; }
-        .form-status.err { color: #ffb4b4; }
-        .contact-direct { margin-top: 28px; font-size: 13px; color: #ddd; }
+        .form-status.ok { color: #b9e4b9; } .form-status.err { color: #ffb4b4; }
+        .contact-direct { margin-top: 28px; font-size: 13px; color: #e2e2de; }
         .contact-direct a { color: var(--accent); border-bottom: 1px solid var(--accent); }
 
-        footer { background: #171b18; color: white; padding: 55px 10% 25px; }
+        /* FOOTER */
+        footer { background: #171b18; color: #fff; padding: 55px 10% 25px; }
         .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding-bottom: 40px; }
         .footer-top h4 { margin-bottom: 4px; }
-        .footer-top p { color: #aeb3ae; font-size: 13px; margin-top: 15px; line-height: 1.8; }
-        .footer-bottom { border-top: 1px solid #383e39; padding-top: 22px; color: #9ca39d; font-size: 11px; }
+        .footer-top p { color: #b5bab4; font-size: 13px; margin-top: 15px; line-height: 1.8; }
+        .footer-top a:hover, .footer-top .linklike:hover { color: var(--accent); }
+        .footer-top .linklike { color: #b5bab4; text-decoration: none; font-size: 13px; }
+        .footer-bottom { border-top: 1px solid #383e39; padding-top: 22px; color: #a6ada7; font-size: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
-        .reveal { opacity: 0; transform: translateY(25px); transition: opacity .7s ease, transform .7s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        /* DIALOGS */
+        dialog { border: 0; padding: 0; background: var(--surface); color: var(--text); width: min(760px, 94vw); max-height: 90vh; box-shadow: 0 30px 80px rgba(0,0,0,.4); margin: auto; }
+        dialog::backdrop { background: rgba(10,14,11,.7); backdrop-filter: blur(3px); }
+        .dlg-head { display: flex; justify-content: space-between; align-items: center; padding: 22px 30px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 1; }
+        .dlg-head h2 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 26px; }
+        .dlg-body { padding: 26px 30px 34px; overflow-y: auto; max-height: calc(90vh - 80px); font-size: 14px; line-height: 1.85; color: var(--muted); }
+        .dlg-body h3 { color: var(--text); font-size: 15px; margin: 22px 0 6px; }
+        .dlg-body ul { padding-left: 20px; margin: 6px 0; }
+        .dlg-body table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+        .dlg-body th, .dlg-body td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+        .dlg-body a { color: var(--accent-text); text-decoration: underline; }
+        .pref-row { display: flex; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+        .pref-row h3 { margin: 0 0 4px; }
+        .switch { position: relative; width: 50px; height: 28px; flex: none; }
+        .switch input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 1; margin: 0; }
+        .switch i { position: absolute; inset: 0; background: #9aa09a; border-radius: 28px; transition: .25s; }
+        .switch i::after { content: ""; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; background: #fff; border-radius: 50%; transition: .25s; }
+        .switch input:checked + i { background: var(--ok); }
+        .switch input:checked + i::after { transform: translateX(22px); }
+        .switch input:disabled { cursor: not-allowed; }
+        .switch input:focus-visible + i { outline: 3px solid var(--accent); outline-offset: 3px; }
+        .dlg-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 
+        .lightbox { width: min(1000px, 96vw); }
+        .lightbox img { width: 100%; max-height: 62vh; object-fit: cover; }
+        .lb-meta { padding: 18px 26px 24px; }
+        .lb-meta h2 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 26px; margin-bottom: 4px; }
+        .lb-meta p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+        .lb-nav { display: flex; gap: 10px; padding: 0 26px 24px; justify-content: space-between; }
+
+        /* CONSENT BANNER */
+        .consent-banner { position: fixed; left: 20px; right: 20px; bottom: 20px; max-width: 880px; margin: 0 auto; background: var(--dark); color: #fff; padding: 24px 28px; z-index: 2500; box-shadow: 0 20px 60px rgba(0,0,0,.45); display: none; gap: 24px; align-items: center; flex-wrap: wrap; border-top: 3px solid var(--accent); }
+        .consent-banner.show { display: flex; animation: fadeUp .4s both; }
+        .consent-banner p { flex: 1 1 380px; font-size: 13px; line-height: 1.7; color: #dedfda; }
+        .consent-banner .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .consent-banner .btn { padding: 13px 20px; }
+        .consent-banner .btn-outline:hover { color: var(--dark); }
+
+        .toast { position: fixed; left: 50%; bottom: 30px; transform: translate(-50%, 30px); background: var(--dark); color: #fff; padding: 14px 24px; font-size: 14px; opacity: 0; pointer-events: none; transition: .35s; z-index: 4000; border-left: 3px solid var(--accent); }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .to-top { position: fixed; right: 22px; bottom: 22px; width: 46px; height: 46px; border: 0; background: var(--dark); color: #fff; cursor: pointer; opacity: 0; pointer-events: none; transition: .3s; z-index: 900; font-size: 18px; }
+        .to-top.show { opacity: 1; pointer-events: auto; }
+        .to-top:hover { background: var(--accent); color: var(--dark); }
+
+        .reveal { transition: opacity .7s ease, transform .7s ease; }
+        .js .reveal { opacity: 0; transform: translateY(25px); }
+        .js .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 1000px) {
+            .tabs { grid-template-columns: 1fr; gap: 25px; }
+            .tablist { flex-direction: row; overflow-x: auto; border-left: 0; border-bottom: 1px solid var(--line); }
+            .tab { border-left: 0; border-bottom: 3px solid transparent; white-space: nowrap; margin: 0 0 -1px; }
+            .tab[aria-selected="true"] { border-bottom-color: var(--accent); }
+            .standard-grid { grid-template-columns: 1fr 1fr; }
+            .planner { grid-template-columns: 1fr; gap: 40px; }
+        }
         @media (max-width: 850px) {
             .navbar { padding: 0 6%; }
             .menu-toggle { display: block; }
-            .nav-links {
-                display: none; position: absolute; top: 82px; left: 0; width: 100%;
-                background: var(--cream); padding: 25px 6%;
-                flex-direction: column; align-items: flex-start; gap: 25px;
-            }
+            .nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; width: 100%; background: var(--bg); padding: 25px 6%; flex-direction: column; align-items: flex-start; gap: 22px; border-bottom: 1px solid var(--line); }
             .nav-links.active { display: flex; }
             .intro { grid-template-columns: 1fr; gap: 35px; }
             .service-grid { grid-template-columns: 1fr 1fr; }
         }
-
         @media (max-width: 600px) {
-            .logo { font-size: 18px; }
-            .hero { min-height: 600px; padding: 0 7%; }
-            .hero h1 { font-size: 45px; }
-            .btn-outline { margin: 12px 0 0; }
-            .intro, .services, .projects { padding: 75px 7%; }
-            .service-grid, .project-grid { grid-template-columns: 1fr; }
-            .intro-image { height: 330px; }
-            .project-card img { height: 260px; }
+            .logo { font-size: 17px; }
+            .hero { min-height: 640px; padding: 0 7%; }
+            .hero .btn-outline { margin: 12px 0 0; }
+            .hero-stats { gap: 28px; }
+            .intro, .services, .projects, .process, .planner, .standards, .faq { padding: 75px 7%; }
+            .service-grid, .project-grid, .standard-grid { grid-template-columns: 1fr; }
+            .intro-image { height: 330px; } .project-card img { height: 260px; }
             .contact { padding: 80px 7%; }
+            .tabpanel, .planner-card { padding: 26px; }
+            .dlg-head, .dlg-body { padding-left: 20px; padding-right: 20px; }
         }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+            .js .reveal { opacity: 1; transform: none; }
+        }
+        @media print { .navbar, .consent-banner, .to-top, .progress, .toast { display: none !important; } }
     </style>
 </head>
 
 <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="progress" id="progress" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
-    <header class="navbar">
-        <a href="#home" class="logo">Gilcon <span>Construction Architects</span></a>
-
-        <button class="menu-toggle" id="menuToggle"
-                aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
-        </ul>
+    <header class="navbar" id="navbar">
+        <a href="#home" class="logo" aria-label="Gilcon Construction Architects - home">Gilcon <span>Construction Architects</span></a>
+        <nav aria-label="Primary" style="display:flex;align-items:center;gap:18px">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+            </ul>
+            <button class="icon-btn" id="themeToggle" aria-label="Switch to dark theme" aria-pressed="false" title="Toggle theme">&#9680;</button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
+        </nav>
     </header>
 
+    <main id="main">
+
     <!-- HERO -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-content reveal">
-            <div class="eyebrow">Architecture · Construction · Design</div>
-            <h1>Building Spaces.<br>Creating Possibilities.</h1>
-            <p>
-                We bring architectural ideas to life through thoughtful
-                design, quality construction and a commitment to excellence.
-                From concept to completion, we build with purpose.
-            </p>
+            <div class="eyebrow">Architecture &middot; Construction &middot; Design</div>
+            <h1 id="hero-title">Building Spaces.<br>Creating Possibilities.</h1>
+            <p>We bring architectural ideas to life through thoughtful design, quality construction and a commitment to excellence. From concept to completion, we build with purpose.</p>
             <a href="#projects" class="btn">EXPLORE OUR WORK</a>
-            <a href="#contact" class="btn btn-outline">GET IN TOUCH</a>
+            <a href="#planner" class="btn btn-outline">PLAN YOUR PROJECT</a>
+            <div class="hero-stats">
+                <div class="stat"><b data-count="2">0</b><span>Countries served</span></div>
+                <div class="stat"><b data-count="6">0</b><span>Integrated services</span></div>
+                <div class="stat"><b data-count="7">0</b><span>Design &amp; delivery stages</span></div>
+            </div>
         </div>
     </section>
 
     <!-- ABOUT -->
-    <section class="intro" id="about">
+    <section class="intro" id="about" aria-labelledby="about-title">
         <div class="reveal">
             <div class="section-label">Who We Are</div>
-            <h2 class="section-title">Thoughtful Design.<br>Exceptional Spaces.</h2>
-            <p>
-                At Gilcon Construction Architects, we believe every great structure
-                begins with a great idea. We combine creativity, technical
-                expertise and practical solutions to deliver spaces
-                that inspire and serve people.
-            </p>
-            <p>
-                Our approach brings together architectural planning,
-                construction expertise and attention to detail,
-                serving clients across Kenya and the United States.
-            </p>
-            <a href="#contact" class="btn">DISCUSS YOUR PROJECT</a>
+            <h2 class="section-title" id="about-title">Thoughtful Design.<br>Exceptional Spaces.</h2>
+            <p>At Gilcon Construction Architects, we believe every great structure begins with a great idea. We combine creativity, technical expertise and practical solutions to deliver spaces that inspire and serve people.</p>
+            <ul class="principles">
+                <li><strong>Site &amp; climate first.</strong> Orientation, light, ventilation and context shape every design.</li>
+                <li><strong>One accountable team.</strong> Design and construction knowledge in the same room, so what is drawn can be built.</li>
+                <li><strong>Documented decisions.</strong> Clear drawings, schedules and reports at every stage.</li>
+            </ul>
+            <p>Our approach brings together architectural planning, construction expertise and attention to detail, serving clients across Kenya and the United States.</p>
+            <a href="#contact" class="btn btn-dark">DISCUSS YOUR PROJECT</a>
         </div>
-
         <div class="reveal">
-            <img class="intro-image"
-                 src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=85"
-                 alt="Contemporary architectural interior">
+            <img class="intro-image" width="1000" height="450" loading="lazy" decoding="async" referrerpolicy="no-referrer"
+                 src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1000&q=80"
+                 alt="Contemporary architectural interior with large windows and natural light">
         </div>
     </section>
 
     <!-- SERVICES -->
-    <section class="services" id="services">
+    <section class="services" id="services" aria-labelledby="services-title">
         <div class="reveal">
             <div class="section-label">What We Do</div>
-            <h2 class="section-title">Complete Solutions for Every Stage of Your Project.</h2>
+            <h2 class="section-title" id="services-title">Complete Solutions for Every Stage of Your Project.</h2>
         </div>
-
         <div class="service-grid">
-            <article class="service-card reveal">
-                <div class="service-number">01 / DESIGN</div>
-                <h3>Architectural Design</h3>
-                <p>Creative architectural concepts, building plans, space planning and design development.</p>
-            </article>
-            <article class="service-card reveal">
-                <div class="service-number">02 / BUILD</div>
-                <h3>Construction</h3>
-                <p>Construction planning, project execution, quality control and site coordination.</p>
-            </article>
-            <article class="service-card reveal">
-                <div class="service-number">03 / VISUALISE</div>
-                <h3>3D Visualization</h3>
-                <p>Realistic 3D renders and visual presentations that help bring your ideas to life.</p>
-            </article>
-            <article class="service-card reveal">
-                <div class="service-number">04 / INTERIORS</div>
-                <h3>Interior Design</h3>
-                <p>Functional and beautiful interior spaces tailored to your needs and lifestyle.</p>
-            </article>
-            <article class="service-card reveal">
-                <div class="service-number">05 / CONSULT</div>
-                <h3>Project Consultancy</h3>
-                <p>Professional project guidance, planning and coordination from concept to delivery.</p>
-            </article>
-            <article class="service-card reveal">
-                <div class="service-number">06 / MANAGE</div>
-                <h3>Project Management</h3>
-                <p>Project scheduling, progress monitoring, resource coordination and reporting.</p>
-            </article>
+            <article class="service-card reveal"><div class="service-number">01 / DESIGN</div><h3>Architectural Design</h3><p>Creative architectural concepts, building plans, space planning and design development.</p></article>
+            <article class="service-card reveal"><div class="service-number">02 / BUILD</div><h3>Construction</h3><p>Construction planning, project execution, quality control and site coordination.</p></article>
+            <article class="service-card reveal"><div class="service-number">03 / VISUALISE</div><h3>3D Visualization</h3><p>Realistic 3D renders and visual presentations that help bring your ideas to life.</p></article>
+            <article class="service-card reveal"><div class="service-number">04 / INTERIORS</div><h3>Interior Design</h3><p>Functional and beautiful interior spaces tailored to your needs and lifestyle.</p></article>
+            <article class="service-card reveal"><div class="service-number">05 / CONSULT</div><h3>Project Consultancy</h3><p>Professional project guidance, planning and coordination from concept to delivery.</p></article>
+            <article class="service-card reveal"><div class="service-number">06 / MANAGE</div><h3>Project Management</h3><p>Project scheduling, progress monitoring, resource coordination and reporting.</p></article>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process" aria-labelledby="process-title">
+        <div class="reveal">
+            <div class="section-label">How We Work</div>
+            <h2 class="section-title" id="process-title">A Clear Path from Brief to Handover.</h2>
+            <p class="lead" style="max-width:620px">Seven stages, each with defined outputs, so you always know what is decided, what is next and what it means for cost and time.</p>
+        </div>
+        <div class="tabs reveal">
+            <div class="tablist" role="tablist" aria-label="Project stages" aria-orientation="vertical" id="tablist"></div>
+            <div class="tabpanel" role="tabpanel" id="tabpanel" tabindex="0" aria-live="polite"></div>
         </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="projects" id="projects">
+    <section class="projects" id="projects" aria-labelledby="projects-title">
         <div class="reveal">
             <div class="section-label">Selected Work</div>
-            <h2 class="section-title">Ideas Made Tangible.</h2>
-            <p style="color:var(--muted); line-height:1.8;">
-                A glimpse into the possibilities of thoughtful design and purposeful construction.
-            </p>
+            <h2 class="section-title" id="projects-title">Ideas Made Tangible.</h2>
+            <p class="lead">A glimpse into the possibilities of thoughtful design and purposeful construction.</p>
+            <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
         </div>
+        <div class="project-grid" id="projectGrid" aria-live="polite"></div>
+    </section>
 
-        <div class="project-grid">
-            <article class="project-card reveal">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85"
-                     alt="Modern residential architecture">
-                <div class="project-info">
-                    <h3>Modern Residence</h3>
-                    <p>Residential Architecture · Concept</p>
-                </div>
-            </article>
-            <article class="project-card reveal">
-                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
-                     alt="Modern interior design">
-                <div class="project-info">
-                    <h3>Contemporary Living</h3>
-                    <p>Interior Design · Concept</p>
-                </div>
-            </article>
-            <article class="project-card reveal">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=85"
-                     alt="Luxury residential building">
-                <div class="project-info">
-                    <h3>Luxury Living</h3>
-                    <p>Residential Design · Concept</p>
-                </div>
-            </article>
-            <article class="project-card reveal">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=85"
-                     alt="Modern commercial architecture">
-                <div class="project-info">
-                    <h3>Urban Architecture</h3>
-                    <p>Commercial Architecture · Concept</p>
-                </div>
-            </article>
+    <!-- PROJECT PLANNER -->
+    <section class="planner" id="planner" aria-labelledby="planner-title">
+        <div class="reveal">
+            <div class="section-label">Project Brief Builder</div>
+            <h2 class="section-title" id="planner-title">Not Sure Where to Start?</h2>
+            <p class="lead">Answer five quick questions and we will draft a clear brief for you. Nothing is sent or stored until you choose to submit the contact form &mdash; the answers stay in your browser.</p>
+        </div>
+        <div class="planner-card reveal" id="plannerCard" aria-live="polite"></div>
+    </section>
+
+    <!-- STANDARDS -->
+    <section class="standards" id="standards" aria-labelledby="standards-title">
+        <div class="reveal">
+            <div class="section-label">Our Standards</div>
+            <h2 class="section-title" id="standards-title">Built on Discipline, Not Just Design.</h2>
+        </div>
+        <!-- Add your credentials here once confirmed, e.g. BORAQS / AAK / NCA registration (Kenya) and state licence numbers (USA). -->
+        <div class="standard-grid">
+            <div class="standard reveal"><h3>Codes &amp; Approvals</h3><p>Designs are prepared with the applicable building regulations and planning approvals of the project's jurisdiction in mind, in Kenya and in the USA.</p></div>
+            <div class="standard reveal"><h3>Quality Control</h3><p>Material specifications, inspection checkpoints and site records keep construction faithful to the drawings.</p></div>
+            <div class="standard reveal"><h3>Health &amp; Safety</h3><p>Safe site practice is planned from the start, not added at the end.</p></div>
+            <div class="standard reveal"><h3>Sustainable Thinking</h3><p>Passive design, durable materials and efficient systems that lower running costs over the building's life.</p></div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="reveal">
+            <div class="section-label">Questions</div>
+            <h2 class="section-title" id="faq-title">Good to Know Before We Talk.</h2>
+            <details><summary>Do you work in both Kenya and the USA?</summary><p>Yes. We serve clients in both countries. Local codes, approvals and construction methods differ, so each project is planned around its jurisdiction.</p></details>
+            <details><summary>What do you need to get started?</summary><p>A short description of your goals, the site location, your timeline and a rough budget range. Site plans, title information or inspiration images help, but are not required for a first conversation.</p></details>
+            <details><summary>Can you design and build, or only one of the two?</summary><p>Either. You can engage us for design only, construction only, or an integrated service from concept to completion.</p></details>
+            <details><summary>How is a project priced?</summary><p>Pricing depends on scope, size, location and stage. After your consultation we confirm scope in writing before any work begins.</p></details>
+            <details><summary>How is my personal information handled?</summary><p>We collect only what you submit, use it to respond to your enquiry, never sell it, and store no cookies beyond what is strictly necessary unless you opt in. Read the <button type="button" class="linklike" data-open="privacyDialog" style="color:var(--accent-text)">Privacy Notice</button> or change your <button type="button" class="linklike" data-open="prefDialog" style="color:var(--accent-text)">privacy settings</button> at any time.</p></details>
         </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" aria-labelledby="contact-title">
         <div class="reveal">
             <div class="section-label">Start a Conversation</div>
-            <h2 class="section-title">Have a Vision?<br>Let's Build It Together.</h2>
-            <p>
-                Tell us about your next project. We'd love to hear
-                your ideas and explore how we can bring them to life.
-            </p>
+            <h2 class="section-title" id="contact-title">Have a Vision?<br>Let's Build It Together.</h2>
+            <p class="lead">Tell us about your next project. We'd love to hear your ideas and explore how we can bring them to life.</p>
 
-            <!--
-                SETUP: Get a free access key at https://web3forms.com
-                (enter YOUR personal email there - all enquiries will be
-                delivered to it), then paste the key below.
-            -->
-            <form class="contact-form" id="contactForm" novalidate>
-                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <form class="contact-form" id="contactForm" novalidate autocomplete="on">
+                <input type="hidden" name="access_key" value="03cd282f-5347-475d-9f90-39d85f8b9ba2">
                 <input type="hidden" name="subject" value="New enquiry - Gilcon Construction Architects website">
                 <input type="hidden" name="from_name" value="Gilcon Construction Architects Website">
                 <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-                <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-                <input type="email" name="email" placeholder="Your email" required autocomplete="email">
-                <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
-                <textarea name="message" placeholder="Tell us about your project" required></textarea>
+                <div class="field">
+                    <label for="f-name">Your name</label>
+                    <input type="text" id="f-name" name="name" required maxlength="80" autocomplete="name" aria-describedby="e-name">
+                    <div class="field-error" id="e-name"></div>
+                </div>
+                <div class="field">
+                    <label for="f-email">Your email</label>
+                    <input type="email" id="f-email" name="email" required maxlength="254" autocomplete="email" inputmode="email" aria-describedby="e-email">
+                    <div class="field-error" id="e-email"></div>
+                </div>
+                <div class="field">
+                    <label for="f-phone">Phone <small>(optional)</small></label>
+                    <input type="tel" id="f-phone" name="phone" maxlength="20" autocomplete="tel" inputmode="tel" aria-describedby="e-phone">
+                    <div class="field-error" id="e-phone"></div>
+                </div>
+                <div class="field">
+                    <label for="f-message">Tell us about your project</label>
+                    <textarea id="f-message" name="message" required maxlength="2000" aria-describedby="e-message c-message"></textarea>
+                    <div class="counter" id="c-message">0 / 2000</div>
+                    <div class="field-error" id="e-message"></div>
+                </div>
+
+                <div class="field">
+                    <label class="consent-check" for="f-consent">
+                        <input type="checkbox" id="f-consent" name="consent" required aria-describedby="e-consent">
+                        <span>I agree that Gilcon Construction Architects may use the details above to respond to my enquiry, as described in the <button type="button" class="linklike" data-open="privacyDialog">Privacy Notice</button>. I understand I can withdraw consent at any time.</span>
+                    </label>
+                    <div class="field-error" id="e-consent"></div>
+                </div>
 
                 <button type="submit" class="btn" id="submitBtn">REQUEST A CONSULTATION</button>
                 <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
@@ -348,117 +525,551 @@
 
             <p class="contact-direct">
                 Or email us directly:
-                <a href="mailto:info@gilconconstructionarchitects.com">info@gilconconstructionarchitects.com</a>
+                <a href="#contact" data-mail id="directMail">Show email address</a>
+                <noscript>(enable JavaScript to view the address)</noscript>
             </p>
         </div>
     </section>
+    </main>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-top">
             <div>
-                <a href="#home" class="logo">Gilcon <span>Construction Architects</span></a>
-                <p>
-                    Architecture and construction solutions.<br>
-                    Kenya · United States
-                </p>
+                <a href="#home" class="logo">Gilcon <span style="color:var(--accent)">Construction Architects</span></a>
+                <p>Architecture and construction solutions.<br>Kenya &middot; United States</p>
             </div>
-
             <div>
                 <h4>Explore</h4>
                 <p><a href="#about">About Us</a></p>
                 <p><a href="#services">Our Services</a></p>
                 <p><a href="#projects">Our Projects</a></p>
             </div>
-
             <div>
                 <h4>Contact</h4>
-                <p><a href="mailto:info@gilconconstructionarchitects.com">Email Us</a></p>
+                <p><a href="#contact" data-mail-text="Email Us" data-mail>Email Us</a></p>
                 <p><a href="#contact">Request Consultation</a></p>
             </div>
+            <div>
+                <h4>Privacy</h4>
+                <p><button type="button" class="linklike" data-open="privacyDialog">Privacy Notice</button></p>
+                <p><button type="button" class="linklike" data-open="prefDialog">Privacy settings</button></p>
+                <p><button type="button" class="linklike" data-open="rightsDialog">Your data rights</button></p>
+            </div>
         </div>
-
         <div class="footer-bottom">
-            © <span id="year"></span> Gilcon Construction Architects. All rights reserved.
+            <span>&copy; <span id="year">2026</span> Gilcon Construction Architects. All rights reserved.</span>
+            <span>Designed for accessibility (WCAG 2.2 AA) &amp; privacy by default.</span>
         </div>
     </footer>
 
-    <script>
-        // Mobile navigation
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
+    <button class="to-top" id="toTop" aria-label="Back to top">&uarr;</button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        menuToggle.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isOpen);
-            menuToggle.textContent = isOpen ? '✕' : '☰';
+    <!-- COOKIE / CONSENT BANNER -->
+    <div class="consent-banner" id="consentBanner" role="region" aria-label="Privacy choices">
+        <p><strong>Your privacy, your choice.</strong> We use only essential storage by default. With your permission we would also remember your preferences (such as theme) and measure how the site is used. We never sell your data. Choices have equal weight &mdash; see the <button type="button" class="linklike" data-open="privacyDialog">Privacy Notice</button>.</p>
+        <div class="btns">
+            <button class="btn btn-outline" id="consentReject" type="button">REJECT NON-ESSENTIAL</button>
+            <button class="btn btn-outline" id="consentCustom" type="button">CUSTOMISE</button>
+            <button class="btn" id="consentAccept" type="button">ACCEPT ALL</button>
+        </div>
+    </div>
+
+    <!-- PREFERENCES DIALOG -->
+    <dialog id="prefDialog" aria-labelledby="pref-title">
+        <div class="dlg-head"><h2 id="pref-title">Privacy settings</h2><button class="icon-btn" data-close aria-label="Close">&times;</button></div>
+        <div class="dlg-body">
+            <p>Choose what we may store on your device. You can change this at any time and your choice is remembered for 12 months.</p>
+            <div class="pref-row"><div><h3 id="p1">Strictly necessary</h3><p>Security and form protection (e.g. spam and rate-limiting in your current session) and remembering this choice. Always on.</p></div><label class="switch"><input type="checkbox" checked disabled aria-labelledby="p1"><i></i></label></div>
+            <div class="pref-row"><div><h3 id="p2">Preferences</h3><p>Remembers your theme and an unsent draft of your project message in this browser.</p></div><label class="switch"><input type="checkbox" id="optPref" aria-labelledby="p2"><i></i></label></div>
+            <div class="pref-row"><div><h3 id="p3">Analytics</h3><p>Anonymous usage statistics to improve the site. Nothing loads unless you switch this on. Not enabled if your browser sends a Global Privacy Control signal.</p></div><label class="switch"><input type="checkbox" id="optAnalytics" aria-labelledby="p3"><i></i></label></div>
+            <p id="gpcNote" hidden><strong>Global Privacy Control detected:</strong> we are treating this as an opt-out of analytics and any sale or sharing of personal information.</p>
+            <div class="dlg-actions">
+                <button class="btn btn-dark" id="prefSave" type="button">SAVE CHOICES</button>
+                <button class="btn btn-outline" id="prefAccept" type="button" style="color:var(--text)">ACCEPT ALL</button>
+                <button class="btn btn-outline" id="prefReject" type="button" style="color:var(--text)">REJECT NON-ESSENTIAL</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- PRIVACY NOTICE -->
+    <dialog id="privacyDialog" aria-labelledby="priv-title">
+        <div class="dlg-head"><h2 id="priv-title">Privacy Notice</h2><button class="icon-btn" data-close aria-label="Close">&times;</button></div>
+        <div class="dlg-body">
+            <p><em>Last updated: <span id="privDate"></span></em></p>
+            <h3>1. Who we are</h3>
+            <p>Gilcon Construction Architects ("we") is the data controller for personal data collected through this website. Contact: <a href="#contact" data-mail>email</a>. <!-- Add: registered address, ODPC registration number (Kenya) and any appointed Data Protection Officer. --></p>
+            <h3>2. What we collect and why</h3>
+            <table>
+                <tr><th>Data</th><th>Purpose</th><th>Basis</th></tr>
+                <tr><td>Name, email, phone (optional), project message you submit</td><td>To respond to your enquiry and discuss a possible engagement</td><td>Your consent; steps at your request before a contract</td></tr>
+                <tr><td>Preference data (theme, unsent draft) stored on your device</td><td>Convenience</td><td>Your consent</td></tr>
+                <tr><td>Anonymous usage statistics (only if enabled)</td><td>Improve the website</td><td>Your consent</td></tr>
+            </table>
+            <p>We do not ask for sensitive personal data. Please do not include identity numbers, financial or health information in your message.</p>
+            <h3>3. Who receives your data</h3>
+            <p>Enquiries are delivered through <a href="https://web3forms.com" rel="noopener noreferrer" target="_blank">Web3Forms</a> (form processing service) to our email inbox. Fonts are loaded from Google Fonts and images from Unsplash, which means your IP address is visible to those providers when the page loads. We never sell personal data, and do not share it for cross-context behavioural advertising.</p>
+            <h3>4. International transfers</h3>
+            <p>We serve clients in Kenya and the USA, and our service providers may process data outside your country. We rely on appropriate safeguards or your consent for such transfers, as required by the Kenya Data Protection Act, 2019 and similar laws.</p>
+            <h3>5. Retention</h3>
+            <p>Enquiries that do not lead to a project are deleted within 24 months. Project records are kept as long as needed for the contract and legal obligations.</p>
+            <h3>6. Your rights</h3>
+            <p>Under the Kenya Data Protection Act, 2019 (and, where applicable, GDPR and the California CCPA/CPRA) you may request access, correction, deletion, restriction, objection, portability, and withdraw consent at any time without affecting earlier processing. California residents also have the right to opt out of sale/sharing (we do neither) and not to be discriminated against for exercising rights. See <button type="button" class="linklike" style="color:var(--accent-text)" data-open="rightsDialog">Your data rights</button>.</p>
+            <h3>7. Complaints</h3>
+            <p>You may complain to us first. In Kenya you may contact the Office of the Data Protection Commissioner (<a href="https://www.odpc.go.ke" rel="noopener noreferrer" target="_blank">odpc.go.ke</a>); in California, the California Attorney General or Privacy Protection Agency.</p>
+            <h3>8. Security</h3>
+            <p>We apply HTTPS, a restrictive content security policy, input validation, spam and rate-limit protection, and minimise what we collect and store. No online system is perfectly secure; we will notify affected people and regulators of breaches as the law requires.</p>
+            <h3>9. Children</h3>
+            <p>This site is not directed to children under 18 and we do not knowingly collect their data.</p>
+            <h3>10. Changes</h3>
+            <p>We will update this notice when our practices change and show the new date above.</p>
+            <div class="dlg-actions"><button class="btn btn-dark" data-open="prefDialog" type="button">PRIVACY SETTINGS</button></div>
+        </div>
+    </dialog>
+
+    <!-- DATA RIGHTS -->
+    <dialog id="rightsDialog" aria-labelledby="rights-title">
+        <div class="dlg-head"><h2 id="rights-title">Your data rights</h2><button class="icon-btn" data-close aria-label="Close">&times;</button></div>
+        <div class="dlg-body">
+            <p>Choose a request and your email app will open with a pre-written message. We may need to verify your identity, and will respond within the time required by law (30 days under GDPR/CCPA-style rules; Kenya's DPA sets its own limits).</p>
+            <div class="dlg-actions" id="rightsActions"></div>
+            <h3>Clear data stored on this device</h3>
+            <p>Removes your saved privacy choice, theme and any unsent draft from this browser. This does not remove an enquiry you already submitted &mdash; request erasure above for that.</p>
+            <div class="dlg-actions"><button class="btn btn-dark" id="clearLocal" type="button">CLEAR LOCAL DATA</button></div>
+        </div>
+    </dialog>
+
+    <!-- LIGHTBOX -->
+    <dialog id="lightbox" class="lightbox" aria-labelledby="lb-title">
+        <div class="dlg-head"><h2 style="font-size:16px;font-family:'DM Sans',sans-serif" id="lb-count">Project</h2><button class="icon-btn" data-close aria-label="Close">&times;</button></div>
+        <img id="lb-img" src="" alt="" width="1000" height="600">
+        <div class="lb-meta"><h2 id="lb-title"></h2><p id="lb-desc"></p></div>
+        <div class="lb-nav"><button class="btn btn-dark" id="lbPrev" type="button">&larr; PREVIOUS</button><button class="btn btn-dark" id="lbNext" type="button">NEXT &rarr;</button></div>
+    </dialog>
+
+<script>
+(() => {
+'use strict';
+
+/* ================= CONFIG ================= */
+const CONFIG = {
+    mailUser: 'info',
+    mailDomain: 'gilconconstructionarchitects.com',
+    consentVersion: 1,
+    consentMonths: 12,
+    analyticsSrc: '',            // e.g. a privacy-friendly analytics script URL. Loaded ONLY after consent. Add its host to the CSP.
+    formMinSeconds: 4,           // time-trap: bots submit instantly
+    formCooldownMs: 60000,       // minimum gap between submissions
+    formMaxPerSession: 3,
+    privacyDate: 'November 21, 2026'
+};
+
+const $  = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const el = (tag, props = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(props)) {
+        if (k === 'class') n.className = v;
+        else if (k === 'text') n.textContent = v;
+        else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+        else n.setAttribute(k, v);
+    }
+    kids.forEach(k => n.append(k));
+    return n;
+};
+const store = {
+    get(k, area = localStorage) { try { return area.getItem(k); } catch { return null; } },
+    set(k, v, area = localStorage) { try { area.setItem(k, v); return true; } catch { return false; } },
+    del(k, area = localStorage) { try { area.removeItem(k); } catch {} }
+};
+const toast = (() => {
+    const t = $('#toast'); let id;
+    return msg => { t.textContent = msg; t.classList.add('show'); clearTimeout(id); id = setTimeout(() => t.classList.remove('show'), 3500); };
+})();
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= EMAIL (assembled at runtime to deter scrapers) ================= */
+const mailAddr = `${CONFIG.mailUser}@${CONFIG.mailDomain}`;
+$$('[data-mail]').forEach(a => {
+    a.href = 'mailto:' + mailAddr;
+    if (!a.dataset.mailText) a.textContent = mailAddr;
+});
+
+/* ================= DIALOG HELPERS ================= */
+const openDlg = id => { const d = document.getElementById(id); if (!d) return; $$('dialog[open]').forEach(o => { if (o !== d) o.close(); }); if (!d.open) d.showModal(); };
+document.addEventListener('click', e => {
+    const opener = e.target.closest('[data-open]');
+    if (opener) { e.preventDefault(); openDlg(opener.dataset.open); return; }
+    if (e.target.closest('[data-close]')) { e.target.closest('dialog').close(); return; }
+    if (e.target.tagName === 'DIALOG') {            // click on backdrop
+        const r = e.target.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) e.target.close();
+    }
+});
+$('#privDate').textContent = CONFIG.privacyDate;
+
+/* ================= CONSENT MANAGER ================= */
+const gpc = navigator.globalPrivacyControl === true;
+const Consent = (() => {
+    const KEY = 'gca_consent';
+    let state = null;
+    const banner = $('#consentBanner'), optPref = $('#optPref'), optAn = $('#optAnalytics');
+
+    const load = () => {
+        try {
+            const s = JSON.parse(store.get(KEY));
+            if (!s || s.v !== CONFIG.consentVersion) return null;
+            const ageMs = Date.now() - new Date(s.ts).getTime();
+            if (isNaN(ageMs) || ageMs > CONFIG.consentMonths * 30.44 * 864e5) return null;
+            return s;
+        } catch { return null; }
+    };
+    const apply = () => {
+        const prefs = !!(state && state.preferences);
+        const analytics = !!(state && state.analytics) && !gpc;
+        if (!prefs) { store.del('gca_theme'); store.del('gca_draft', sessionStorage); }
+        if (analytics) loadAnalytics();
+        document.dispatchEvent(new CustomEvent('consentchange', { detail: { preferences: prefs, analytics } }));
+    };
+    let analyticsLoaded = false;
+    const loadAnalytics = () => {
+        if (analyticsLoaded || !CONFIG.analyticsSrc) return;
+        analyticsLoaded = true;
+        const s = el('script', { src: CONFIG.analyticsSrc, defer: '', crossorigin: 'anonymous' });
+        document.head.append(s);
+    };
+    const save = (preferences, analytics) => {
+        // Timestamped, versioned record of the choice (proof of consent, stored only on this device)
+        state = { v: CONFIG.consentVersion, ts: new Date().toISOString(), preferences, analytics: analytics && !gpc, gpc };
+        store.set(KEY, JSON.stringify(state));
+        banner.classList.remove('show');
+        apply();
+    };
+    const sync = () => { optPref.checked = !!(state && state.preferences); optAn.checked = !!(state && state.analytics) && !gpc; optAn.disabled = gpc; $('#gpcNote').hidden = !gpc; };
+
+    $('#consentAccept').addEventListener('click', () => { save(true, true); toast('Preferences saved'); });
+    $('#consentReject').addEventListener('click', () => { save(false, false); toast('Only essential storage is used'); });
+    $('#consentCustom').addEventListener('click', () => { sync(); openDlg('prefDialog'); });
+    $('#prefSave').addEventListener('click', () => { save(optPref.checked, optAn.checked); $('#prefDialog').close(); toast('Privacy choices saved'); });
+    $('#prefAccept').addEventListener('click', () => { save(true, true); $('#prefDialog').close(); toast('Preferences saved'); });
+    $('#prefReject').addEventListener('click', () => { save(false, false); $('#prefDialog').close(); toast('Only essential storage is used'); });
+    $('#prefDialog').addEventListener('close', sync);
+    document.addEventListener('click', e => { if (e.target.closest('[data-open="prefDialog"]')) sync(); });
+
+    state = load();
+    if (state) apply(); else banner.classList.add('show');
+    sync();
+
+    return {
+        allows: c => !!(state && state[c]),
+        reset() { store.del(KEY); state = null; sync(); banner.classList.add('show'); apply(); }
+    };
+})();
+
+/* ================= THEME ================= */
+(() => {
+    const btn = $('#themeToggle'), root = document.documentElement;
+    const set = (mode, persist) => {
+        root.dataset.theme = mode;
+        btn.setAttribute('aria-pressed', mode === 'dark');
+        btn.setAttribute('aria-label', mode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+        if (persist && Consent.allows('preferences')) store.set('gca_theme', mode);
+    };
+    const saved = Consent.allows('preferences') ? store.get('gca_theme') : null;
+    set(saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), false);
+    btn.addEventListener('click', () => set(root.dataset.theme === 'dark' ? 'light' : 'dark', true));
+    document.addEventListener('consentchange', e => { if (e.detail.preferences) store.set('gca_theme', root.dataset.theme); });
+})();
+
+/* ================= NAVIGATION, PROGRESS, SCROLL EFFECTS ================= */
+(() => {
+    const nav = $('#navbar'), links = $('#navLinks'), toggle = $('#menuToggle'), bar = $('#progress'), top = $('#toTop');
+    const setMenu = open => { links.classList.toggle('active', open); toggle.setAttribute('aria-expanded', open); toggle.innerHTML = open ? '&times;' : '&#9776;'; };
+    toggle.addEventListener('click', () => setMenu(!links.classList.contains('active')));
+    links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && links.classList.contains('active')) { setMenu(false); toggle.focus(); } });
+
+    let lastY = 0, ticking = false;
+    const onScroll = () => {
+        const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+        bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+        nav.classList.toggle('scrolled', y > 10);
+        const hide = y > lastY && y > 300 && !links.classList.contains('active') && !nav.contains(document.activeElement);
+        nav.classList.toggle('hidden', hide);
+        top.classList.toggle('show', y > 700);
+        lastY = y; ticking = false;
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    top.addEventListener('click', () => scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+    onScroll();
+
+    // Active link highlighting
+    const map = new Map($$('.nav-links a[href^="#"]').map(a => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+            if (en.isIntersecting) {
+                map.forEach(a => a.removeAttribute('aria-current'));
+                $$('.nav-links a').forEach(a => a.classList.remove('active'));
+                const a = map.get(en.target.id);
+                if (a && !a.classList.contains('nav-cta')) { a.classList.add('active'); a.setAttribute('aria-current', 'true'); }
+            }
         });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['home', 'about', 'services', 'process', 'projects', 'faq', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
+})();
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.textContent = '☰';
-                menuToggle.setAttribute('aria-expanded', 'false');
-            });
+/* ================= REVEAL + COUNTERS ================= */
+(() => {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } }), { threshold: 0.12 });
+    $$('.reveal').forEach(n => io.observe(n));
+
+    const counter = new IntersectionObserver(es => es.forEach(en => {
+        if (!en.isIntersecting) return;
+        const n = en.target, to = +n.dataset.count; counter.unobserve(n);
+        if (reduceMotion) { n.textContent = to; return; }
+        const t0 = performance.now(), dur = 1400;
+        const tick = t => { const p = Math.min((t - t0) / dur, 1); n.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+    }), { threshold: 0.6 });
+    $$('[data-count]').forEach(n => counter.observe(n));
+    $('#year').textContent = new Date().getFullYear();
+})();
+
+/* ================= PROCESS TABS (ARIA tabs pattern) ================= */
+(() => {
+    const stages = [
+        ['Brief & Feasibility', 'We listen first: your goals, site, budget range, timeline and constraints. We assess what is feasible before any drawing starts.', ['Project brief', 'Site analysis', 'Feasibility notes']],
+        ['Concept Design', 'Early ideas explored through sketches, massing and layouts, so you can react to options and choose a direction.', ['Concept sketches', 'Massing studies', 'Preliminary layouts']],
+        ['Schematic Design', 'The chosen concept is organised into plans, sections and elevations, with outline materials and structure considered.', ['Plans & elevations', '3D visuals', 'Outline cost guidance']],
+        ['Design Development', 'Coordination with structural and services design, material selection and detail, locking in the design before documentation.', ['Coordinated drawings', 'Material palette', 'Interior concepts']],
+        ['Approvals & Documentation', 'Technical drawings and specifications are prepared and submitted to the authorities for the project\'s jurisdiction.', ['Technical drawings', 'Specifications', 'Authority submissions']],
+        ['Construction', 'Site coordination, quality control, scheduling and progress reporting keep the build true to the drawings.', ['Programme', 'Site inspections', 'Progress reports']],
+        ['Handover', 'Final inspections, snagging and handover documentation so you can occupy with confidence.', ['Snag list', 'As-built records', 'Handover pack']]
+    ];
+    const list = $('#tablist'), panel = $('#tabpanel');
+    const tabs = stages.map(([title], i) => {
+        const b = el('button', { class: 'tab', role: 'tab', id: 'tab' + i, 'aria-controls': 'tabpanel', type: 'button' }, el('span', { text: String(i + 1).padStart(2, '0') }), document.createTextNode(title));
+        list.append(b); return b;
+    });
+    const show = (i, focus) => {
+        tabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; });
+        const [title, desc, outputs] = stages[i];
+        panel.setAttribute('aria-labelledby', 'tab' + i);
+        panel.replaceChildren(el('h3', { text: title }), el('p', { text: desc }), el('h4', { text: 'Typical outputs' }), el('ul', {}, ...outputs.map(o => el('li', { text: o }))));
+        if (focus) tabs[i].focus();
+    };
+    list.addEventListener('click', e => { const i = tabs.indexOf(e.target.closest('.tab')); if (i > -1) show(i); });
+    list.addEventListener('keydown', e => {
+        const cur = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true');
+        const keys = { ArrowDown: cur + 1, ArrowRight: cur + 1, ArrowUp: cur - 1, ArrowLeft: cur - 1, Home: 0, End: tabs.length - 1 };
+        if (e.key in keys) { e.preventDefault(); show((keys[e.key] + tabs.length) % tabs.length, true); }
+    });
+    show(0);
+})();
+
+/* ================= PROJECTS: FILTER + LIGHTBOX ================= */
+(() => {
+    const img = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1000&q=80`;
+    const projects = [
+        { title: 'Modern Residence', cat: 'Residential', type: 'Residential Architecture \u00b7 Concept', id: '1600607687939-ce8a6c25118c', alt: 'Modern residential architecture', desc: 'A contemporary home shaped around daylight, outdoor living and clean, honest materials.' },
+        { title: 'Contemporary Living', cat: 'Interiors', type: 'Interior Design \u00b7 Concept', id: '1600210492486-724fe5c67fb0', alt: 'Modern interior design', desc: 'An interior concept balancing warmth, storage and flow for everyday family life.' },
+        { title: 'Luxury Living', cat: 'Residential', type: 'Residential Design \u00b7 Concept', id: '1600566753190-17f0baa2a6c3', alt: 'Luxury residential building', desc: 'A premium residential concept with generous volumes, terraces and refined detailing.' },
+        { title: 'Urban Architecture', cat: 'Commercial', type: 'Commercial Architecture \u00b7 Concept', id: '1486406146926-c627a92ad1ab', alt: 'Modern commercial architecture', desc: 'A commercial building concept with an efficient floor plate and a strong street presence.' },
+        { title: 'Light-Filled Interior', cat: 'Interiors', type: 'Interior Design \u00b7 Concept', id: '1600566753086-00f18fb6b3ea', alt: 'Contemporary architectural interior', desc: 'Open-plan interior planning that brings natural light deep into the living space.' }
+    ];
+    const cats = ['All', ...new Set(projects.map(p => p.cat))];
+    const grid = $('#projectGrid'), filters = $('#filters'), dlg = $('#lightbox');
+    let active = 'All', visible = projects, idx = 0;
+
+    cats.forEach(c => filters.append(el('button', { class: 'chip', type: 'button', 'aria-pressed': c === 'All', text: c, 'data-cat': c })));
+    filters.addEventListener('click', e => {
+        const b = e.target.closest('.chip'); if (!b) return;
+        active = b.dataset.cat;
+        $$('.chip', filters).forEach(c => c.setAttribute('aria-pressed', c === b));
+        render();
+    });
+    function render() {
+        visible = projects.filter(p => active === 'All' || p.cat === active);
+        grid.replaceChildren(...visible.map((p, i) => {
+            const im = el('img', { src: img(p.id), alt: p.alt, width: 1000, height: 660, loading: 'lazy', decoding: 'async', referrerpolicy: 'no-referrer' });
+            return el('button', { class: 'project-card', type: 'button', 'aria-label': `View ${p.title}, ${p.type}`, style: `animation-delay:${i * 70}ms`, 'data-i': i },
+                el('div', { class: 'thumb' }, im),
+                el('div', { class: 'project-info' }, el('h3', { text: p.title }), el('p', { text: p.type })));
+        }));
+    }
+    function openAt(i) {
+        idx = (i + visible.length) % visible.length;
+        const p = visible[idx], im = $('#lb-img');
+        im.src = img(p.id).replace('w=1000', 'w=1400'); im.alt = p.alt;
+        $('#lb-title').textContent = p.title; $('#lb-desc').textContent = p.desc + ' (' + p.type + ')';
+        $('#lb-count').textContent = `Project ${idx + 1} of ${visible.length}`;
+        if (!dlg.open) dlg.showModal();
+    }
+    grid.addEventListener('click', e => { const c = e.target.closest('.project-card'); if (c) openAt(+c.dataset.i); });
+    $('#lbPrev').addEventListener('click', () => openAt(idx - 1));
+    $('#lbNext').addEventListener('click', () => openAt(idx + 1));
+    dlg.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') openAt(idx - 1); if (e.key === 'ArrowRight') openAt(idx + 1); });
+    let sx = null;
+    dlg.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    dlg.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) openAt(idx + (dx < 0 ? 1 : -1)); sx = null; });
+    render();
+})();
+
+/* ================= PROJECT BRIEF BUILDER ================= */
+(() => {
+    const steps = [
+        { key: 'type', q: 'What are you planning?', opts: ['A new home', 'A renovation or extension', 'A commercial building', 'Interior design only', 'Not sure yet'] },
+        { key: 'where', q: 'Where is the project?', opts: ['Kenya', 'United States', 'Both / to be decided'] },
+        { key: 'stage', q: 'Where are you in the process?', opts: ['Just an idea', 'I have land / a site', 'I have drawings already', 'Ready to build'] },
+        { key: 'services', q: 'What help do you need?', opts: ['Design only', 'Construction only', 'Design and build', 'Project management / consultancy'] },
+        { key: 'when', q: 'When would you like to start?', opts: ['Within 3 months', '3 to 6 months', '6 to 12 months', 'Just exploring'] }
+    ];
+    const answers = {}; let i = 0;
+    const card = $('#plannerCard');
+
+    const bar = () => el('div', { class: 'planner-progress', 'aria-hidden': 'true' }, ...steps.map((_, j) => el('i', { class: j < i ? 'done' : (j === i ? 'done' : '') })));
+    const render = () => {
+        if (i >= steps.length) return renderSummary();
+        const s = steps[i];
+        const opts = el('div', { class: 'options', role: 'radiogroup', 'aria-label': s.q });
+        s.opts.forEach(o => {
+            const b = el('button', { class: 'option', type: 'button', role: 'radio', 'aria-checked': answers[s.key] === o, text: o });
+            b.addEventListener('click', () => { answers[s.key] = o; $$('.option', opts).forEach(x => x.setAttribute('aria-checked', x === b)); next.disabled = false; });
+            opts.append(b);
         });
+        const back = el('button', { class: 'btn btn-outline', type: 'button', text: 'BACK', style: 'color:var(--text)' });
+        back.disabled = i === 0; back.style.opacity = i === 0 ? .4 : 1;
+        back.addEventListener('click', () => { i--; render(); });
+        const next = el('button', { class: 'btn btn-dark', type: 'button', text: i === steps.length - 1 ? 'SEE MY BRIEF' : 'NEXT' });
+        next.disabled = !answers[s.key];
+        next.addEventListener('click', () => { i++; render(); });
+        card.replaceChildren(bar(), el('p', { class: 'section-label', text: `Question ${i + 1} of ${steps.length}` }), el('h3', { text: s.q }), opts, el('div', { class: 'planner-nav' }, back, next));
+        $('.option', card).focus({ preventScroll: true });
+    };
+    const brief = () => `Project brief (built with the website planner)\n` +
+        `\u2022 Project: ${answers.type}\n\u2022 Location: ${answers.where}\n\u2022 Stage: ${answers.stage}\n\u2022 Services needed: ${answers.services}\n\u2022 Timeline: ${answers.when}\n\nAdditional details: `;
+    const renderSummary = () => {
+        const use = el('button', { class: 'btn btn-dark', type: 'button', text: 'USE THIS IN THE CONTACT FORM' });
+        use.addEventListener('click', () => {
+            const ta = $('#f-message'); ta.value = brief(); ta.dispatchEvent(new Event('input'));
+            $('#contact').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); setTimeout(() => ta.focus(), 600);
+        });
+        const again = el('button', { class: 'btn btn-outline', type: 'button', text: 'START OVER', style: 'color:var(--text)' });
+        again.addEventListener('click', () => { Object.keys(answers).forEach(k => delete answers[k]); i = 0; render(); });
+        card.replaceChildren(bar(), el('h3', { text: 'Your draft brief' }), el('div', { class: 'planner-summary', text: brief().trim() }), el('div', { class: 'planner-nav' }, again, use));
+    };
+    render();
+})();
 
-        // Reveal on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
+/* ================= CONTACT FORM (validation, sanitising, anti-abuse) ================= */
+(() => {
+    const form = $('#contactForm'), status = $('#formStatus'), btn = $('#submitBtn'), msg = $('#f-message');
+    const loadedAt = Date.now();
+    const clean = s => String(s ?? '').normalize('NFC')
+        .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F\u200B-\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g, '')
+        .replace(/\r\n?/g, '\n').replace(/[ \t]{2,}/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const rules = {
+        name:    v => v.length < 2 ? 'Please enter your name.' : (v.length > 80 || !/^[\p{L}\p{M}' .\-]+$/u.test(v) ? 'Use letters, spaces, apostrophes or hyphens only.' : ''),
+        email:   v => (!/^[^\s@]{1,64}@[^\s@]+\.[^\s@]{2,}$/.test(v) || v.length > 254) ? 'Please enter a valid email address.' : '',
+        phone:   v => v && !/^\+?[0-9 ()\-]{7,20}$/.test(v) ? 'Use a valid phone number, e.g. +254 700 000 000.' : '',
+        message: v => v.length < 20 ? 'Please tell us a little more (at least 20 characters).' : (v.length > 2000 ? 'Please keep it under 2000 characters.' : '')
+    };
+    const setErr = (name, text) => {
+        const input = form.elements[name], out = $('#e-' + name);
+        if (out) out.textContent = text;
+        if (input) input.setAttribute('aria-invalid', text ? 'true' : 'false');
+    };
+    Object.keys(rules).forEach(n => form.elements[n].addEventListener('blur', () => setErr(n, rules[n](clean(form.elements[n].value)))));
 
-        // Dynamic copyright year
-        document.getElementById('year').textContent = new Date().getFullYear();
+    // Character counter + optional draft (sessionStorage, only with Preferences consent; no email/phone stored)
+    const counter = $('#c-message');
+    msg.addEventListener('input', () => {
+        counter.textContent = `${msg.value.length} / 2000`;
+        if (Consent.allows('preferences')) store.set('gca_draft', msg.value, sessionStorage);
+    });
+    const restore = () => { const d = Consent.allows('preferences') && store.get('gca_draft', sessionStorage); if (d && !msg.value) { msg.value = d; msg.dispatchEvent(new Event('input')); } };
+    restore();
+    document.addEventListener('consentchange', restore);
 
-        // Contact form -> emails you via Web3Forms
-        const form = document.getElementById('contactForm');
-        const statusEl = document.getElementById('formStatus');
-        const submitBtn = document.getElementById('submitBtn');
+    const say = (text, cls) => { status.className = 'form-status ' + (cls || ''); status.textContent = text; };
 
-        form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async e => {
+        e.preventDefault(); say('');
+        const v = { name: clean(form.elements.name.value), email: clean(form.elements.email.value), phone: clean(form.elements.phone.value), message: clean(form.elements.message.value) };
+        let firstBad = null;
+        for (const k of Object.keys(rules)) { const er = rules[k](v[k]); setErr(k, er); if (er && !firstBad) firstBad = k; }
+        const consent = form.elements.consent;
+        setErr('consent', consent.checked ? '' : 'Please tick the box to let us contact you about your enquiry.');
+        if (!consent.checked && !firstBad) firstBad = 'consent';
+        if (firstBad) { say('Please check the highlighted fields.', 'err'); form.elements[firstBad].focus(); return; }
+
+        // Anti-abuse: honeypot, time-trap, rate limit
+        if (form.elements.botcheck.value) { say('Thank you!', 'ok'); return; }                       // silently drop bots
+        if ((Date.now() - loadedAt) / 1000 < CONFIG.formMinSeconds) { say('Please take a moment to review your message, then submit again.', 'err'); return; }
+        const last = +store.get('gca_last', sessionStorage) || 0, count = +store.get('gca_count', sessionStorage) || 0;
+        if (Date.now() - last < CONFIG.formCooldownMs) { say('Please wait a minute before sending another message.', 'err'); return; }
+        if (count >= CONFIG.formMaxPerSession) { say('Message limit reached. Please email us directly.', 'err'); return; }
+
+        const key = form.elements.access_key.value;
+        if (!key || key === 'YOUR_ACCESS_KEY_HERE') { say('The form is not configured yet. Please email us directly.', 'err'); return; }
+
+        const data = new FormData();
+        data.append('access_key', key);
+        data.append('subject', form.elements.subject.value);
+        data.append('from_name', form.elements.from_name.value);
+        data.append('botcheck', '');
+        data.append('name', v.name); data.append('email', v.email);
+        if (v.phone) data.append('phone', v.phone);
+        data.append('message', v.message);
+        data.append('consent_given', 'Yes - ' + new Date().toISOString() + ' - notice dated ' + CONFIG.privacyDate);   // proof of consent
+
+        btn.disabled = true; btn.textContent = 'SENDING...';
+        const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 15000);
+        try {
+            const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Accept': 'application/json' }, body: data, signal: ctl.signal, referrerPolicy: 'no-referrer', credentials: 'omit' });
+            const json = await res.json();
+            if (!res.ok || !json.success) throw new Error('failed');
+            say('Thank you! Your message has been sent. We will be in touch soon.', 'ok');
+            store.set('gca_last', String(Date.now()), sessionStorage); store.set('gca_count', String(count + 1), sessionStorage);
+            store.del('gca_draft', sessionStorage);
+            form.reset(); counter.textContent = '0 / 2000';
+            ['name', 'email', 'phone', 'message', 'consent'].forEach(k => setErr(k, ''));
+        } catch {
+            say('Sorry, something went wrong. Please email us directly instead.', 'err');
+        } finally {
+            clearTimeout(timer); btn.disabled = false; btn.textContent = 'REQUEST A CONSULTATION';
+        }
+    });
+})();
+
+/* ================= DATA-RIGHTS TOOLS ================= */
+(() => {
+    const requests = [
+        ['Access my data', 'Data access request', 'I would like to receive a copy of the personal data you hold about me.'],
+        ['Correct my data', 'Data correction request', 'Please correct the following personal data you hold about me: '],
+        ['Delete my data', 'Data erasure request', 'Please delete all personal data you hold about me and confirm once done.'],
+        ['Object / restrict', 'Objection / restriction request', 'I object to / ask you to restrict the processing of my personal data because: '],
+        ['Withdraw consent', 'Withdrawal of consent', 'I withdraw my consent to your processing of my personal data.'],
+        ['California: opt out / know', 'CCPA/CPRA request', 'I am a California resident and wish to exercise my rights under the CCPA/CPRA: '],
+    ];
+    const box = $('#rightsActions');
+    requests.forEach(([label, subject, body]) => {
+        const a = el('a', { class: 'btn btn-outline', style: 'color:var(--text)', href: '#', text: label.toUpperCase() });
+        a.addEventListener('click', e => {
             e.preventDefault();
-            statusEl.className = 'form-status';
-
-            const data = new FormData(form);
-            if (!data.get('name').trim() || !data.get('email').trim() || !data.get('message').trim()) {
-                statusEl.textContent = 'Please fill in your name, email and message.';
-                statusEl.classList.add('err');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'SENDING...';
-
-            try {
-                const res = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: data
-                });
-                const json = await res.json();
-                if (res.ok && json.success) {
-                    statusEl.textContent = 'Thank you! Your message has been sent. We will be in touch soon.';
-                    statusEl.classList.add('ok');
-                    form.reset();
-                } else {
-                    throw new Error(json.message || 'Request failed');
-                }
-            } catch (err) {
-                statusEl.textContent = 'Sorry, something went wrong. Please email us directly instead.';
-                statusEl.classList.add('err');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'REQUEST A CONSULTATION';
-            }
+            location.href = `mailto:${CONFIG.mailUser}@${CONFIG.mailDomain}?subject=${encodeURIComponent(subject + ' - Gilcon website')}&body=${encodeURIComponent(body + '\n\nName:\nEmail used on the website:\n')}`;
         });
-    </script>
+        box.append(a);
+    });
+    $('#clearLocal').addEventListener('click', () => {
+        [localStorage, sessionStorage].forEach(area => { try { Object.keys(area).filter(k => k.startsWith('gca_')).forEach(k => area.removeItem(k)); } catch {} });
+        $('#rightsDialog').close(); Consent.reset(); toast('Local data cleared');
+    });
+})();
 
+})();
+</script>
 </body>
 </html>
