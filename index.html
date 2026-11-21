@@ -45,7 +45,7 @@
 
     <style>
         :root {
-            --dark: #202421;
+            --dark: #0f1411;
             --cream: #f5f2eb;
             --white: #ffffff;
             --muted: #5c625b;          /* 5.9:1 on cream (WCAG AA) */
@@ -63,6 +63,18 @@
             --bg: #171b18; --surface: #202421; --text: #f1efe8; --muted: #b3b8b1;
             --accent-text: #cdb48a; --line: #3a403b;
         }
+        .navbar .logo {
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.navbar .logo img {
+    display: block;
+    width: 180px;
+    height: 65px;
+    object-fit: contain;
+}
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 10px); }
@@ -218,6 +230,157 @@
         .director p { color: var(--muted); font-size: 14px; line-height: 1.85; margin-bottom: 22px; }
         .director .btn { padding: 13px 20px; }
 
+.directors-section {
+    padding: 90px 6%;
+    overflow: hidden;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 55px;
+}
+
+.section-heading .eyebrow {
+    color: #b08b55;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.section-heading h2 {
+    font-size: clamp(30px, 4vw, 46px);
+    margin: 14px 0;
+}
+
+.section-heading p {
+    line-height: 1.8;
+    opacity: 0.75;
+}
+
+.director-carousel {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.director-track {
+    display: flex;
+    transition: transform 0.6s ease;
+    will-change: transform;
+}
+
+.director {
+    flex: 0 0 100%;
+    box-sizing: border-box;
+    padding: 45px 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 420px;
+}
+
+.director .avatar {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e9e2d8;
+    color: #59452f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border: 4px solid #b08b55;
+}
+
+.director .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.director h3 {
+    font-size: 25px;
+    margin: 0 0 8px;
+}
+
+.director .role {
+    color: #b08b55;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.director p {
+    max-width: 650px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.carousel-arrow {
+    width: 43px;
+    height: 43px;
+    border: 1px solid #b08b55;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.carousel-arrow:hover {
+    background: #b08b55;
+    color: white;
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 9px;
+}
+
+.carousel-dots button {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #bbb;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.carousel-dots button.active {
+    width: 25px;
+    border-radius: 10px;
+    background: #b08b55;
+}
+
+@media (max-width: 600px) {
+    .directors-section {
+        padding: 65px 5%;
+    }
+
+    .director {
+        padding: 30px 12px;
+    }
+
+    .director p {
+        font-size: 14px;
+    }
+}
+
+
         /* FAQ */
         .faq { padding: 105px 10%; max-width: 1100px; margin: 0 auto; }
         details { border-bottom: 1px solid var(--line); }
@@ -357,8 +520,11 @@
     <div class="progress" id="progress" aria-hidden="true"></div>
 
     <!-- NAVIGATION -->
-    <header class="navbar" id="navbar">
-        <a href="#home" class="logo" aria-label="Gilcon Construction Architects - home">Gilcon <span>Construction Architects</span></a>
+  <header class="navbar" id="navbar">
+        <a href="#home" class="logo" aria-label="Gilcon Construction Architects - home">
+            <img src="images/GILCON_Architectural.png"
+                 alt="Gilcon Construction Architects logo">
+        </a>
         <nav aria-label="Primary" style="display:flex;align-items:center;gap:18px">
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
@@ -374,7 +540,6 @@
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
         </nav>
     </header>
-
     <main id="main">
 
     <!-- HERO -->
@@ -480,34 +645,98 @@
     </section>
 
     <!-- LEADERSHIP -->
-    <section class="leadership" id="leadership" aria-labelledby="leadership-title">
-        <div class="reveal">
-            <div class="section-label">Leadership</div>
-            <h2 class="section-title" id="leadership-title">The People Behind the Practice.</h2>
-            <p class="lead" style="max-width:620px">Gilcon is led by directors who stay close to every project, so decisions are made quickly and accountability is clear.</p>
-        </div>
-        <div class="director-grid">
-            <article class="director featured reveal" aria-labelledby="dir-moses">
-                <!-- PHOTO: save the picture as images/moses-gori.jpg (same folder as index.html, inside an "images" folder).
-                     It appears automatically; if the file is missing, the initials "MG" show instead.
-                     Only use a photo with the person's consent (a photo is personal data). -->
-                <div class="avatar" data-photo="images/MosesGori.jpg" data-alt="Portrait of Moses Gori, Managing Director" aria-hidden="true">MG</div>
-                <h3 id="dir-moses">Moses Gori</h3>
+<section class="directors-section" id="leadership">
+    <div class="section-heading">
+        <span class="eyebrow">OUR LEADERSHIP</span>
+        <h2>Meet Our Directors</h2>
+        <p>
+            Experienced leadership driving excellence in architecture,
+            design and construction across Kenya and the United States.
+        </p>
+    </div>
+
+    <div class="director-carousel">
+
+        <div class="director-track" id="directorTrack">
+
+            <!-- SLIDE 1 -->
+            <article class="director featured">
+                <div class="avatar"
+                     data-photo="images/MosesGori.jpg"
+                     data-alt="Portrait of Moses Gori">
+                    MG
+                </div>
+                <h3>Moses Gori</h3>
                 <div class="role">Managing Director</div>
-                <p>Leads the firm's direction, client relationships and project delivery across Kenya and the United States, ensuring every project is guided by clear design thinking and sound construction practice.</p>
-                <button type="button" class="btn btn-dark" id="contactMD">CONTACT THE MANAGING DIRECTOR</button>
+                <p>
+                    Leads the firm's direction, client relationships and
+                    project delivery across Kenya and the United States,
+                    ensuring every project is guided by clear design
+                    thinking and sound construction practice.
+                </p>
+                <button type="button" class="btn btn-dark" id="contactMD">
+                    CONTACT THE MANAGING DIRECTOR
+                </button>
             </article>
 
-            <!-- ADD MORE DIRECTORS: copy the block below, remove the comment markers, and fill in name, role and bio.
-            <article class="director reveal" aria-labelledby="dir-2">
-                <div class="avatar" data-photo="images/full-name.jpg" data-alt="Portrait of Full Name, Director" aria-hidden="true">AB</div>
-                <h3 id="dir-2">Full Name</h3>
-                <div class="role">Director, Architecture</div>
-                <p>Short professional bio (2-3 sentences).</p>
+            <!-- SLIDE 2 - PLACEHOLDER -->
+            <article class="director">
+                <div class="avatar"
+                     data-photo="images/MosesGori.jpg"
+                     data-alt="Portrait of Moses Gori">
+                    MG
+                </div>
+                <h3>Moses Gori</h3>
+                <div class="role">Managing Director</div>
+                <p>
+                    Leads the firm's direction, client relationships and
+                    project delivery across Kenya and the United States,
+                    ensuring every project is guided by clear design
+                    thinking and sound construction practice.
+                </p>
+                <button type="button" class="btn btn-dark">
+                    CONTACT THE MANAGING DIRECTOR
+                </button>
             </article>
-            -->
+
+            <!-- SLIDE 3 - PLACEHOLDER -->
+            <article class="director">
+                <div class="avatar"
+                     data-photo="images/MosesGori.jpg"
+                     data-alt="Portrait of Moses Gori">
+                    MG
+                </div>
+                <h3>Moses Gori</h3>
+                <div class="role">Managing Director</div>
+                <p>
+                    Leads the firm's direction, client relationships and
+                    project delivery across Kenya and the United States,
+                    ensuring every project is guided by clear design
+                    thinking and sound construction practice.
+                </p>
+                <button type="button" class="btn btn-dark">
+                    CONTACT THE MANAGING DIRECTOR
+                </button>
+            </article>
+
         </div>
-    </section>
+
+        <div class="carousel-controls">
+            <button class="carousel-arrow" id="directorPrev"
+                    aria-label="Previous director">&#8592;</button>
+
+            <div class="carousel-dots" id="directorDots">
+                <button class="active" aria-label="Slide 1"></button>
+                <button aria-label="Slide 2"></button>
+                <button aria-label="Slide 3"></button>
+            </div>
+
+            <button class="carousel-arrow" id="directorNext"
+                    aria-label="Next director">&#8594;</button>
+        </div>
+
+    </div>
+</section>
 
     <!-- FAQ -->
     <section class="faq" id="faq" aria-labelledby="faq-title">
@@ -1142,6 +1371,56 @@ const Consent = (() => {
         $('#rightsDialog').close(); Consent.reset(); toast('Local data cleared');
     });
 })();
+
+const directorTrack = document.getElementById('directorTrack');
+const directorSlides = document.querySelectorAll('.director');
+const directorDots = document.querySelectorAll('#directorDots button');
+
+const directorPrev = document.getElementById('directorPrev');
+const directorNext = document.getElementById('directorNext');
+
+let currentDirector = 0;
+
+function showDirector(index) {
+    currentDirector = (index + directorSlides.length) % directorSlides.length;
+
+    directorTrack.style.transform =
+        `translateX(-${currentDirector * 100}%)`;
+
+    directorDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentDirector);
+    });
+}
+
+directorNext.addEventListener('click', () => {
+    showDirector(currentDirector + 1);
+});
+
+directorPrev.addEventListener('click', () => {
+    showDirector(currentDirector - 1);
+});
+
+directorDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => showDirector(index));
+});
+
+// Load director photographs
+document.querySelectorAll('.director .avatar').forEach(avatar => {
+    const photo = avatar.dataset.photo;
+
+    if (!photo) return;
+
+    const img = document.createElement('img');
+    img.src = photo;
+    img.alt = avatar.dataset.alt || 'Director portrait';
+
+    img.onerror = () => {
+        img.remove();
+    };
+
+    avatar.appendChild(img);
+});
+
 
 })();
 </script>
