@@ -31,6 +31,7 @@
       "description": "Architectural design, construction, 3D visualization, interior design, project consultancy and project management.",
       "url": "https://www.gilconconstructionarchitects.com/",
       "areaServed": [{"@type": "Country", "name": "Kenya"}, {"@type": "Country", "name": "United States"}],
+      "employee": {"@type": "Person", "name": "Moses Gori", "jobTitle": "Managing Director"},
       "knowsAbout": ["Architectural design", "Construction", "3D visualization", "Interior design", "Project management"]
     }
     </script>
@@ -203,6 +204,20 @@
         .standard h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 12px; }
         .standard p { font-size: 14px; line-height: 1.8; color: #c3c8c3; }
 
+        /* LEADERSHIP */
+        .leadership { padding: 105px 10%; background: var(--surface); }
+        .director-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .director { border: 1px solid var(--line); background: var(--bg); padding: 36px 32px; position: relative; transition: transform .3s, border-color .3s; }
+        .director:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .director.featured { border-top: 3px solid var(--accent); }
+        .avatar { width: 96px; height: 96px; border-radius: 50%; display: grid; place-items: center; background: var(--dark); color: var(--accent); font-family: 'Playfair Display', serif; font-size: 34px; margin-bottom: 24px; overflow: hidden; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar.has-photo { background: none; border: 2px solid var(--accent); }
+        .director h3 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 28px; margin-bottom: 6px; }
+        .director .role { color: var(--accent-text); font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px; }
+        .director p { color: var(--muted); font-size: 14px; line-height: 1.85; margin-bottom: 22px; }
+        .director .btn { padding: 13px 20px; }
+
         /* FAQ */
         .faq { padding: 105px 10%; max-width: 1100px; margin: 0 auto; }
         details { border-bottom: 1px solid var(--line); }
@@ -321,7 +336,7 @@
             .hero { min-height: 640px; padding: 0 7%; }
             .hero .btn-outline { margin: 12px 0 0; }
             .hero-stats { gap: 28px; }
-            .intro, .services, .projects, .process, .planner, .standards, .faq { padding: 75px 7%; }
+            .intro, .services, .projects, .process, .planner, .standards, .leadership, .faq { padding: 75px 7%; }
             .service-grid, .project-grid, .standard-grid { grid-template-columns: 1fr; }
             .intro-image { height: 330px; } .project-card img { height: 260px; }
             .contact { padding: 80px 7%; }
@@ -351,6 +366,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#process">Process</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#leadership">Leadership</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
             </ul>
@@ -463,6 +479,36 @@
         </div>
     </section>
 
+    <!-- LEADERSHIP -->
+    <section class="leadership" id="leadership" aria-labelledby="leadership-title">
+        <div class="reveal">
+            <div class="section-label">Leadership</div>
+            <h2 class="section-title" id="leadership-title">The People Behind the Practice.</h2>
+            <p class="lead" style="max-width:620px">Gilcon is led by directors who stay close to every project, so decisions are made quickly and accountability is clear.</p>
+        </div>
+        <div class="director-grid">
+            <article class="director featured reveal" aria-labelledby="dir-moses">
+                <!-- PHOTO: save the picture as images/moses-gori.jpg (same folder as index.html, inside an "images" folder).
+                     It appears automatically; if the file is missing, the initials "MG" show instead.
+                     Only use a photo with the person's consent (a photo is personal data). -->
+                <div class="avatar" data-photo="images/MosesGori.jpg" data-alt="Portrait of Moses Gori, Managing Director" aria-hidden="true">MG</div>
+                <h3 id="dir-moses">Moses Gori</h3>
+                <div class="role">Managing Director</div>
+                <p>Leads the firm's direction, client relationships and project delivery across Kenya and the United States, ensuring every project is guided by clear design thinking and sound construction practice.</p>
+                <button type="button" class="btn btn-dark" id="contactMD">CONTACT THE MANAGING DIRECTOR</button>
+            </article>
+
+            <!-- ADD MORE DIRECTORS: copy the block below, remove the comment markers, and fill in name, role and bio.
+            <article class="director reveal" aria-labelledby="dir-2">
+                <div class="avatar" data-photo="images/full-name.jpg" data-alt="Portrait of Full Name, Director" aria-hidden="true">AB</div>
+                <h3 id="dir-2">Full Name</h3>
+                <div class="role">Director, Architecture</div>
+                <p>Short professional bio (2-3 sentences).</p>
+            </article>
+            -->
+        </div>
+    </section>
+
     <!-- FAQ -->
     <section class="faq" id="faq" aria-labelledby="faq-title">
         <div class="reveal">
@@ -544,6 +590,7 @@
                 <p><a href="#about">About Us</a></p>
                 <p><a href="#services">Our Services</a></p>
                 <p><a href="#projects">Our Projects</a></p>
+                <p><a href="#leadership">Leadership</a></p>
             </div>
             <div>
                 <h4>Contact</h4>
@@ -816,7 +863,7 @@ const Consent = (() => {
             }
         });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['home', 'about', 'services', 'process', 'projects', 'faq', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
+    ['home', 'about', 'services', 'process', 'projects', 'leadership', 'faq', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
 })();
 
 /* ================= REVEAL + COUNTERS ================= */
@@ -1041,6 +1088,33 @@ const Consent = (() => {
         } finally {
             clearTimeout(timer); btn.disabled = false; btn.textContent = 'REQUEST A CONSULTATION';
         }
+    });
+})();
+
+/* ================= DIRECTOR PHOTOS (auto-load, falls back to initials) ================= */
+(() => {
+    $$('.avatar[data-photo]').forEach(box => {
+        const probe = new Image();
+        probe.decoding = 'async';
+        probe.referrerPolicy = 'no-referrer';
+        probe.onload = () => {
+            const img = el('img', { src: probe.src, alt: box.dataset.alt || '', width: 96, height: 96, loading: 'lazy', decoding: 'async' });
+            box.replaceChildren(img);
+            box.removeAttribute('aria-hidden');
+            box.classList.add('has-photo');
+        };
+        probe.src = box.dataset.photo;          // if the file does not exist, onload never fires and initials stay
+    });
+})();
+
+/* ================= CONTACT THE MANAGING DIRECTOR ================= */
+(() => {
+    const btn = $('#contactMD'); if (!btn) return;
+    btn.addEventListener('click', () => {
+        const ta = $('#f-message'), prefix = 'For the attention of Moses Gori, Managing Director:\n\n';
+        if (!ta.value.startsWith(prefix)) { ta.value = prefix + ta.value; ta.dispatchEvent(new Event('input')); }
+        $('#contact').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        setTimeout(() => { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }, 600);
     });
 })();
 
